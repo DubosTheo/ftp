@@ -37,12 +37,13 @@ void ftpServer::addClient(int fd)
     clientFd.fd = fd;
     clientFd.events = POLLIN;
     _fds.push_back(clientFd);
-    std::cout << "[+] - new client connected\n";
+    std::cout << "[+] - New client connected\n";
 }
 
 void ftpServer::deleteClient(int fd)
 {
     close(fd);
+    std::cout << "[-] - A client has disconnected\n";
 }
 
 
