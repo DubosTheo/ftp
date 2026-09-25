@@ -1,0 +1,15 @@
+# binary
+myftp
+
+#lib c-lion
+.idea
+
+#lib vs-code
+.vscode
+
+#client code && binary
+client.cpp
+client
+
+# obj
+obj
