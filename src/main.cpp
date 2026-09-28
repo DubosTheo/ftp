@@ -4,9 +4,11 @@
 
 int main(int argc, char **argv)
 {
-    if (argc == 1)
+    if (argc != 3)
         return 0;
     try {
+        if (chdir(argv[2]) < 0)
+            throw std::runtime_error("No directory found\n");
         ftpServer server(argv[1]);
         server.run();
     } catch (std::out_of_range &out) {

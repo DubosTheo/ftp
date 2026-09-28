@@ -26,8 +26,6 @@ ftpServer::ftpServer(const std::string strPort)
         throw std::runtime_error("Error binding serverFd\n");
     }
     _fds.push_back(serverFd);
-    std::cout << "Server waiting for connection on Port " << _port << std::endl;
-    listen(_fds[_serverId].fd, SOMAXCONN);
 }
 
 void ftpServer::addClient(int fd)
@@ -49,6 +47,8 @@ void ftpServer::deleteClient(int fd)
 
 void ftpServer::run()
 {
+    std::cout << "Server waiting for connection on Port " << _port << std::endl;
+    listen(_fds[_serverId].fd, SOMAXCONN);
     while (true) {
         int return_poll = poll(_fds.data(), _fds.size(), -1);
         if (return_poll < 0)
