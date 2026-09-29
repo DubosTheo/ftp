@@ -12,5 +12,6 @@ public:
     explicit ftpServer(std::string strPort);
     void run();
     void addClient(int fd);
+    static bool listenClient(int fd);
     static void deleteClient(int fd);
 };

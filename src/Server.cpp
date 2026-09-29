@@ -44,6 +44,20 @@ void ftpServer::deleteClient(int fd)
     std::cout << "[-] - A client has disconnected\n";
 }
 
+bool ftpServer::listenClient(int fd)
+{
+    std::vector<char> buffer(1024);
+    ssize_t size = 0;
+
+    size = read(fd, buffer.data(), buffer.size());
+    if (size == 0)
+        return false;
+    if (size < 0)
+        throw std::runtime_error("Can't read client\n");
+    std::string str(buffer.data(), size);
+    std::cout << str << std::endl;
+    return true;
+}
 
 void ftpServer::run()
 {
@@ -54,11 +68,22 @@ void ftpServer::run()
         if (return_poll < 0)
             throw std::runtime_error("Error on poll\n");
         for (size_t i = 0; i < _fds.size(); i++) {
+            if (!(_fds[i].revents & POLLIN))
+                continue;
             if (i == _serverId) {
                 int clientfd = accept(_fds[_serverId].fd, nullptr, nullptr);
-                if (clientfd >= 0)
+                if (clientfd >= 0) {
                     addClient(clientfd);
+                }
             }
+            if (i != _serverId) {
+                if (!listenClient(_fds[i].fd)) {
+                    close(_fds[i].fd);
+                    _fds.erase(_fds.begin() + i);
+                    i--;
+                }
+            }
+
         }
     }
     close(_fds[_serverId].fd);
