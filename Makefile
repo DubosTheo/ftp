@@ -5,9 +5,12 @@
 ## makefile
 ##
 
-CXX := g++
+CXX := clang++
 
 SRC += src/Server.cpp
+SRC += src/Client.cpp
+SRC += src/commandManager.cpp
+SRC += src/Commands/Quit.cpp
 
 SRC_MAIN = src/main.cpp
 
@@ -22,8 +25,7 @@ NAME = myftp
 
 INCLUDE = -Isrc -I/usr/local/include
 
-CXXFLAGS = -Wall -Wextra -Wpedantic -std=c++20
-
+CXXFLAGS = -Wall -Wextra -Wpedantic -std=c++20 -stdlib=libstdc++
 CFLAGS_DEBUGS = -fanalyzer -g
 
 all: $(NAME)

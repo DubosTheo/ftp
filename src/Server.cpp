@@ -1,7 +1,8 @@
 #include "Server.hpp"
-
+#include "Client.hpp"
 #include <iostream>
 #include <netinet/in.h>
+#include <sstream>
 
 ftpServer::ftpServer(const std::string strPort)
 {
@@ -36,26 +37,38 @@ void ftpServer::addClient(int fd)
     clientFd.events = POLLIN;
     _fds.push_back(clientFd);
     std::cout << "[+] - New client connected\n";
+    std::string str = "220 - Hello client!\r\n";
+    _clients.insert({fd, Client(fd)});
+    write(fd, str.c_str(), str.size());
 }
 
-void ftpServer::deleteClient(int fd)
+void ftpServer::deleteClient(int i, const int fd)
 {
-    close(fd);
+    close(_fds[i].fd);
+    _fds.erase(_fds.begin() + i);
+    _clients.erase(fd);
     std::cout << "[-] - A client has disconnected\n";
 }
 
-bool ftpServer::listenClient(int fd)
+void ftpServer::parseCommand(std::string &command, Client &client)
 {
-    std::vector<char> buffer(1024);
-    ssize_t size = 0;
+    std::stringstream ss;
+    std::string tmpCommand;
 
-    size = read(fd, buffer.data(), buffer.size());
-    if (size == 0)
+    ss >> tmpCommand;
+}
+
+
+bool ftpServer::listenClient(Client &client)
+{
+    if (client.needToDisconnect())
         return false;
-    if (size < 0)
-        throw std::runtime_error("Can't read client\n");
-    std::string str(buffer.data(), size);
-    std::cout << str << std::endl;
+    size_t size = client.readData();
+    if (size == 0)
+        return true;
+    std::string command;
+    while (client.reformatCommand(command))
+        _commandManager.execute(client, command, *this);
     return true;
 }
 
@@ -72,18 +85,14 @@ void ftpServer::run()
                 continue;
             if (i == _serverId) {
                 int clientfd = accept(_fds[_serverId].fd, nullptr, nullptr);
-                if (clientfd >= 0) {
+                if (clientfd >= 0)
                     addClient(clientfd);
-                }
+                continue;
             }
-            if (i != _serverId) {
-                if (!listenClient(_fds[i].fd)) {
-                    close(_fds[i].fd);
-                    _fds.erase(_fds.begin() + i);
-                    i--;
-                }
+            if (!listenClient(_clients.at(_fds[i].fd))) {
+                deleteClient(i, _fds[i].fd);
+                i--;
             }
-
         }
     }
     close(_fds[_serverId].fd);

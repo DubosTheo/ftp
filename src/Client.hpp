@@ -1,0 +1,22 @@
+#pragma once
+#include <string>
+
+class ftpServer;
+
+class Client {
+    int _fd;
+    std::string _username;
+    std::string _buffer;
+    bool _isAuth = false;
+    bool _needToDisconnect = false;
+public:
+    explicit Client(int fd);
+    void appendBuffer(std::string buffer);
+    size_t readData();
+    void sendData(std::string str);
+    [[nodiscard]] int getFd() const {return _fd;}
+    bool reformatCommand(std::string &command);
+    void parseCommand(std::string &command);
+    [[nodiscard]] bool needToDisconnect() const {return _needToDisconnect;}
+    void setDisconnect(bool disconnect) { _needToDisconnect = disconnect;}
+};
