@@ -13,6 +13,7 @@ SRC += src/commandManager.cpp
 SRC += src/Commands/commandQUIT.cpp
 SRC += src/Commands/commandUSER.cpp
 SRC += src/Commands/commandPASS.cpp
+SRC += src/Commands/commandSYST.cpp
 
 SRC_MAIN = src/main.cpp
 

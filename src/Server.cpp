@@ -50,15 +50,6 @@ void ftpServer::deleteClient(int i, const int fd)
     std::cout << "[-] - A client has disconnected\n";
 }
 
-void ftpServer::parseCommand(std::string &command, Client &client)
-{
-    std::stringstream ss;
-    std::string tmpCommand;
-
-    ss >> tmpCommand;
-}
-
-
 bool ftpServer::listenClient(Client &client)
 {
     if (client.needToDisconnect())
