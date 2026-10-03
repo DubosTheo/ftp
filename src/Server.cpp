@@ -37,7 +37,7 @@ void ftpServer::addClient(int fd)
     clientFd.events = POLLIN;
     _fds.push_back(clientFd);
     std::cout << "[+] - New client connected\n";
-    std::string str = "220 - Hello client!\r\n";
+    std::string str = "220 Hello client!\r\n";
     _clients.insert({fd, Client(fd)});
     write(fd, str.c_str(), str.size());
 }

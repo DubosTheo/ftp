@@ -2,12 +2,14 @@
 #include "Commands/commandQUIT.hpp"
 #include <sstream>
 #include "Client.hpp"
+#include "Commands/commandPASS.hpp"
 #include "Commands/commandUSER.hpp"
 
 commandManager::commandManager()
 {
     _commands["QUIT"] = std::make_unique<commandQUIT>();
     _commands["USER"] = std::make_unique<commandUSER>();
+    _commands["PASS"] = std::make_unique<commandPASS>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)

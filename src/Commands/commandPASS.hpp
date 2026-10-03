@@ -1,7 +1,7 @@
 #pragma once
 #include "../ICommand.hpp"
 
-class commandPASS : ICommand{
+class commandPASS : public ICommand{
 public:
     ~commandPASS() override = default;
     commandPASS() = default;
