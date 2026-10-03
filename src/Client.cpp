@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <vector>
 #include <sstream>
+#include <iostream>
 #include <sstream>
 
 Client::Client(int fd) : _fd(fd)
@@ -40,6 +41,7 @@ bool Client::reformatCommand(std::string &command)
         return false;
     command = partCommand.substr(0, pos);
     _buffer.erase(0, pos + 2);
+    std::cout << command << std::endl;
     return true;
 }
 

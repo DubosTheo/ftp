@@ -5,6 +5,7 @@ class ftpServer;
 
 class Client {
     int _fd;
+    std::string _password;
     std::string _username;
     std::string _buffer;
     bool _isAuth = false;
@@ -16,7 +17,8 @@ public:
     void sendData(std::string str);
     [[nodiscard]] int getFd() const {return _fd;}
     bool reformatCommand(std::string &command);
-    void parseCommand(std::string &command);
     [[nodiscard]] bool needToDisconnect() const {return _needToDisconnect;}
     void setDisconnect(bool disconnect) { _needToDisconnect = disconnect;}
+    void setUsername(const std::string &username) {_username = username;}
+    void setPassword(const std::string &password) {_password = password;}
 };

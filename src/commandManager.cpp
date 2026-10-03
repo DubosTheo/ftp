@@ -1,11 +1,13 @@
 #include "commandManager.hpp"
-#include "Commands/Quit.hpp"
+#include "Commands/commandQUIT.hpp"
 #include <sstream>
 #include "Client.hpp"
+#include "Commands/commandUSER.hpp"
 
 commandManager::commandManager()
 {
-    _commands["QUIT"] = std::make_unique<Quit>();
+    _commands["QUIT"] = std::make_unique<commandQUIT>();
+    _commands["USER"] = std::make_unique<commandUSER>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
@@ -21,9 +23,7 @@ void commandManager::execute(Client &client, const std::string &command, ftpServ
     std::getline(ss >> std::ws, args);
     auto it = _commands.find(cmdName);
     if (it != _commands.end())
-        it->second->execute(client, args, server);
-    else {
-        std::string err = "502 Command not found\r\n";
-        client.sendData(err);
-    }
+        return it->second->execute(client, args, server);
+    std::string err = "502 Command not found\r\n";
+    client.sendData(err);
 }

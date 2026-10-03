@@ -10,7 +10,9 @@ CXX := clang++
 SRC += src/Server.cpp
 SRC += src/Client.cpp
 SRC += src/commandManager.cpp
-SRC += src/Commands/Quit.cpp
+SRC += src/Commands/commandQUIT.cpp
+SRC += src/Commands/commandUSER.cpp
+SRC += src/Commands/commandPASS.cpp
 
 SRC_MAIN = src/main.cpp
 
