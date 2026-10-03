@@ -13,6 +13,7 @@ commandManager::commandManager()
     _commands["PASS"] = std::make_unique<commandPASS>();
     _commands["SYST"] = std::make_unique<commandSYST>();
     _commands["FEAT"] = std::make_unique<commandSYST>();
+    _commands["RETR"] = std::make_unique<commandSYST>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
