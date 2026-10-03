@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Client.hpp"
 #include "Commands/commandPASS.hpp"
+#include "Commands/commandSYST.hpp"
 #include "Commands/commandUSER.hpp"
 
 commandManager::commandManager()
@@ -10,6 +11,7 @@ commandManager::commandManager()
     _commands["QUIT"] = std::make_unique<commandQUIT>();
     _commands["USER"] = std::make_unique<commandUSER>();
     _commands["PASS"] = std::make_unique<commandPASS>();
+    _commands["SYST"] = std::make_unique<commandSYST>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
@@ -19,9 +21,8 @@ void commandManager::execute(Client &client, const std::string &command, ftpServ
     std::string args;
 
     ss >> cmdName;
-    for (char &c : cmdName) {
+    for (char &c : cmdName)
         c = static_cast<char>(std::toupper(c));
-    }
     std::getline(ss >> std::ws, args);
     auto it = _commands.find(cmdName);
     if (it != _commands.end())
