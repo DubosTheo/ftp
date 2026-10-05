@@ -5,6 +5,7 @@ class ftpServer;
 
 class Client {
     int _fd;
+    int _dataFd;
     std::string _password;
     std::string _username;
     std::string _buffer;
@@ -21,4 +22,7 @@ public:
     void setDisconnect(bool disconnect) { _needToDisconnect = disconnect;}
     void setUsername(const std::string &username) {_username = username;}
     void setPassword(const std::string &password) {_password = password;}
+    void setDataFd(int dataFd) {_dataFd = dataFd;}
+    [[nodiscard]] int getDataFd() const {return _dataFd;}
+    void closeDataFd();
 };

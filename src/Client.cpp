@@ -8,9 +8,18 @@
 #include <iostream>
 #include <sstream>
 
-Client::Client(int fd) : _fd(fd)
+Client::Client(int fd) : _fd(fd), _dataFd(-1)
 {
 }
+
+void Client::closeDataFd()
+{
+    if (_dataFd != -1) {
+        close(_dataFd);
+        _dataFd = -1;
+    }
+}
+
 
 void Client::appendBuffer(std::string buffer)
 {
@@ -41,6 +50,7 @@ bool Client::reformatCommand(std::string &command)
         return false;
     command = partCommand.substr(0, pos);
     _buffer.erase(0, pos + 2);
+    std::cout << command << std::endl;
     return true;
 }
 

@@ -5,6 +5,9 @@
 #include "Commands/commandPASS.hpp"
 #include "Commands/commandSYST.hpp"
 #include "Commands/commandUSER.hpp"
+#include "Commands/commandFEAT.hpp"
+#include "Commands/commandPASV.hpp"
+#include "Commands/commandRETR.hpp"
 
 commandManager::commandManager()
 {
@@ -12,8 +15,9 @@ commandManager::commandManager()
     _commands["USER"] = std::make_unique<commandUSER>();
     _commands["PASS"] = std::make_unique<commandPASS>();
     _commands["SYST"] = std::make_unique<commandSYST>();
-    _commands["FEAT"] = std::make_unique<commandSYST>();
-    _commands["RETR"] = std::make_unique<commandSYST>();
+    _commands["FEAT"] = std::make_unique<commandFEAT>();
+    _commands["RETR"] = std::make_unique<commandRETR>();
+    _commands["PASV"] = std::make_unique<commandPASV>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
