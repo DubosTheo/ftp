@@ -11,6 +11,7 @@ class Client {
     std::string _buffer;
     bool _isAuth = false;
     bool _needToDisconnect = false;
+    bool _isLoggedIn = false;
 public:
     explicit Client(int fd);
     void appendBuffer(std::string buffer);
@@ -25,4 +26,7 @@ public:
     void setDataFd(int dataFd) {_dataFd = dataFd;}
     [[nodiscard]] int getDataFd() const {return _dataFd;}
     void closeDataFd();
+    void setLoggedIn(bool isLogged) {_isLoggedIn = isLogged;}
+    [[nodiscard]] bool getLoggedIn() const {return _isLoggedIn;}
+    std::string getUsername() {return _username;}
 };

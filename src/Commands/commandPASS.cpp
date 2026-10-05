@@ -6,6 +6,12 @@
 
 void commandPASS::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
+    if (client.getUsername() != "anonymous") {
+        client.sendData("530 Please loggin\r\n");
+        return;
+    }
+    client.setDisconnect(false);
+    client.setLoggedIn(true);
     client.setPassword(command);
     std::string str = "202 password set!\r\n";
     client.sendData(str);

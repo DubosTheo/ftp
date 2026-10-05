@@ -9,6 +9,11 @@
 
 void commandPASV::execute(Client &client, [[maybe_unused]]std::string &command, [[maybe_unused]]ftpServer &server)
 {
+    if (!client.getLoggedIn()) {
+        client.sendData("530 Please loggin\r\n");
+        return;
+    }
+
     int tmpFd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in addr{};

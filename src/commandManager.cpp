@@ -33,6 +33,6 @@ void commandManager::execute(Client &client, const std::string &command, ftpServ
     auto it = _commands.find(cmdName);
     if (it != _commands.end())
         return it->second->execute(client, args, server);
-    std::string err = "502 Command not found\r\n";
+    std::string err = "502 Command not found or not logged in\r\n";
     client.sendData(err);
 }

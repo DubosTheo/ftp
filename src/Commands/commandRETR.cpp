@@ -7,6 +7,10 @@
 
 void commandRETR::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
+    if (!client.getLoggedIn()) {
+        client.sendData("530 Please loggin\r\n");
+        return;
+    }
     if (command.empty()) {
         std::string err = "501 error arguments\r\n";
         client.sendData(err);

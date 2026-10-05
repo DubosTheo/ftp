@@ -11,7 +11,10 @@
 
 void commandPORT::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)server;
+    if (!client.getLoggedIn()) {
+        client.sendData("530 Please loggin\r\n");
+        return;
+    }
 
     std::vector<int> info;
     std::stringstream ss(command);
