@@ -15,7 +15,7 @@ public:
     explicit Client(int fd);
     void appendBuffer(std::string buffer);
     size_t readData();
-    void sendData(std::string str);
+    void sendData(const std::string& str) const;
     [[nodiscard]] int getFd() const {return _fd;}
     bool reformatCommand(std::string &command);
     [[nodiscard]] bool needToDisconnect() const {return _needToDisconnect;}

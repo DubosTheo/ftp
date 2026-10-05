@@ -4,10 +4,8 @@
 
 #include "Client.hpp"
 
-void commandQUIT::execute(Client &client, std::string &command, ftpServer &server)
+void commandQUIT::execute(Client &client, [[maybe_unused]]std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)server;
-    (void)command;
     client.setDisconnect(true);
     std::string str = "220 disconnection\r\n";
     client.sendData(str);

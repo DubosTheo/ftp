@@ -5,10 +5,8 @@
 #include "Client.hpp"
 #include <fstream>
 
-void commandRETR::execute(Client &client, std::string &command, ftpServer &server)
+void commandRETR::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)server;
-    (void)client;
     if (command.empty()) {
         std::string err = "501 error arguments\r\n";
         client.sendData(err);
@@ -38,7 +36,6 @@ void commandRETR::execute(Client &client, std::string &command, ftpServer &serve
         while (file.read(buffer, sizeof(buffer)) || file.gcount() > 0) {
             ssize_t bytesToWrite = file.gcount();
             ssize_t bytesWritten = 0;
-
             while (bytesWritten < bytesToWrite) {
                 ssize_t ret = write(dataFd, buffer + bytesWritten, bytesToWrite - bytesWritten);
                 if (ret <= 0) {

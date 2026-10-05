@@ -7,11 +7,8 @@
 
 #include "Client.hpp"
 
-void commandPASV::execute(Client &client, std::string &command, ftpServer &server)
+void commandPASV::execute(Client &client, [[maybe_unused]]std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)command;
-    (void)server;
-
     int tmpFd = socket(AF_INET, SOCK_STREAM, 0);
 
     struct sockaddr_in addr{};

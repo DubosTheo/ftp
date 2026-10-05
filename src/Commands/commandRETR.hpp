@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 #include "../ICommand.hpp"
 
 class  commandRETR : public ICommand {

@@ -4,10 +4,8 @@
 
 #include "Client.hpp"
 
-void commandPASS::execute(Client &client, std::string &command, ftpServer &server)
+void commandPASS::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)server;
-    (void)command;
     client.setPassword(command);
     std::string str = "202 password set!\r\n";
     client.sendData(str);

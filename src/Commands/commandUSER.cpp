@@ -2,9 +2,8 @@
 
 #include "Client.hpp"
 
-void commandUSER::execute(Client &client, std::string &command, ftpServer &server)
+void commandUSER::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
 {
-    (void)server;
     client.setUsername(command);
     std::string str = "220 username set!\r\n";
     client.sendData(str);

@@ -54,7 +54,8 @@ bool Client::reformatCommand(std::string &command)
     return true;
 }
 
-void Client::sendData(std::string str)
+void Client::sendData(const std::string& str) const
 {
-    write(_fd, str.c_str(), str.size());
+    if (write(_fd, str.c_str(), str.size()) < 0)
+        throw std::runtime_error("Can't write on client fd\n");
 }
