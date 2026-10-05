@@ -15,6 +15,7 @@ SRC += src/Commands/commandUSER.cpp
 SRC += src/Commands/commandPASS.cpp
 SRC += src/Commands/commandSYST.cpp
 SRC += src/Commands/commandFEAT.cpp
+SRC +=  src/Commands/commandRETR.cpp
 
 SRC_MAIN = src/main.cpp
 
