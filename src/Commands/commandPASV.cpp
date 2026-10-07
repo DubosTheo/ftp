@@ -7,7 +7,7 @@
 
 #include "Client.hpp"
 
-void commandPASV::execute(Client &client, [[maybe_unused]]std::string &command, [[maybe_unused]]ftpServer &server)
+void commandPASV::execute(Client &client, [[maybe_unused]]std::string &command)
 {
     if (!client.getLoggedIn()) {
         client.sendData("530 Please loggin\r\n");

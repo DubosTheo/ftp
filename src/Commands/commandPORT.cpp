@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 #include "Client.hpp"
 
-void commandPORT::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
+void commandPORT::execute(Client &client, std::string &command)
 {
     if (!client.getLoggedIn()) {
         client.sendData("530 Please loggin\r\n");

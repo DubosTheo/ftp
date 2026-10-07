@@ -3,7 +3,7 @@
 
 class commandSTRU : public ICommand{
 public:
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
     ~commandSTRU() override = default;
     commandSTRU() = default;
 };

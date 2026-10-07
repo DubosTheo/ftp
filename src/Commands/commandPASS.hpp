@@ -5,5 +5,5 @@ class commandPASS : public ICommand{
 public:
     ~commandPASS() override = default;
     commandPASS() = default;
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
 };

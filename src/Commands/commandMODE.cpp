@@ -1,7 +1,7 @@
 #include "commandMODE.hpp"
 #include "../Client.hpp"
 
-void commandMODE::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
+void commandMODE::execute(Client &client, std::string &command)
 {
     if (command.empty())
         return client.sendData("501 Syntax error\r\n");

@@ -7,5 +7,5 @@ class  commandRETR : public ICommand {
 public:
     ~commandRETR() override = default;
     commandRETR() = default;
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
 };

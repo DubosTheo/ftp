@@ -5,5 +5,5 @@ class commandPORT : public ICommand {
 public:
     ~commandPORT() override = default;
     commandPORT() = default;
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
 };

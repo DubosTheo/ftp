@@ -28,7 +28,7 @@ commandManager::commandManager()
     _commands["STRU"] = std::make_unique<commandSTRU>();
 }
 
-void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
+void commandManager::execute(Client &client, const std::string &command)
 {
     std::stringstream ss(command);
     std::string cmdName;
@@ -40,7 +40,7 @@ void commandManager::execute(Client &client, const std::string &command, ftpServ
     std::getline(ss >> std::ws, args);
     auto it = _commands.find(cmdName);
     if (it != _commands.end())
-        return it->second->execute(client, args, server);
+        return it->second->execute(client, args);
     std::string err = "502 Command not found or not logged in\r\n";
     client.sendData(err);
 }

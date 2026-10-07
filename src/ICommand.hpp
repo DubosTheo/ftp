@@ -7,5 +7,5 @@ class Client;
 class ICommand {
 public:
     virtual ~ICommand() = default;
-    virtual void execute(Client &client, std::string &command, ftpServer &server) = 0;
+    virtual void execute(Client &client, std::string &command) = 0;
 };

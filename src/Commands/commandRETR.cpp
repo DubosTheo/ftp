@@ -5,7 +5,7 @@
 #include "Client.hpp"
 #include <fstream>
 
-void commandRETR::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
+void commandRETR::execute(Client &client, std::string &command)
 {
     if (!client.getLoggedIn()) {
         client.sendData("530 Please loggin\r\n");

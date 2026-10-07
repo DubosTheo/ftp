@@ -20,6 +20,12 @@ void Client::closeDataFd()
     }
 }
 
+Client::~Client()
+{
+    closeDataFd();
+}
+
+
 
 void Client::appendBuffer(std::string buffer)
 {

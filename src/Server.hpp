@@ -19,5 +19,4 @@ public:
     void addClient(int fd);
     void deleteClient(int i, int fd);
     bool listenClient(Client &client);
-    void parseCommand(std::string &command, Client &client);
 };

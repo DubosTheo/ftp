@@ -4,7 +4,7 @@
 
 #include "Client.hpp"
 
-void commandPASS::execute(Client &client, std::string &command, [[maybe_unused]]ftpServer &server)
+void commandPASS::execute(Client &client, std::string &command)
 {
     if (client.getUsername() != "anonymous") {
         client.sendData("530 Please loggin\r\n");

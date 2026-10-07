@@ -5,5 +5,5 @@ class commandSYST : public ICommand {
 public:
     ~commandSYST() override = default;
     commandSYST() = default;
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
 };

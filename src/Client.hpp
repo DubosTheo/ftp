@@ -14,6 +14,7 @@ class Client {
     bool _isLoggedIn = false;
 public:
     explicit Client(int fd);
+    ~Client();
     void appendBuffer(std::string buffer);
     size_t readData();
     void sendData(const std::string& str) const;

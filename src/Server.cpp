@@ -59,7 +59,7 @@ bool ftpServer::listenClient(Client &client)
         return true;
     std::string command;
     while (client.reformatCommand(command))
-        _commandManager.execute(client, command, *this);
+        _commandManager.execute(client, command);
     return true;
 }
 

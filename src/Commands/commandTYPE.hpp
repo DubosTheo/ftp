@@ -3,7 +3,7 @@
 
 class commandTYPE : public ICommand {
 public:
-    void execute(Client &client, std::string &command, ftpServer &server) override;
+    void execute(Client &client, std::string &command) override;
     ~commandTYPE() override = default;
     commandTYPE() = default;
 };
