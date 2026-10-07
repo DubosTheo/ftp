@@ -2,6 +2,7 @@
 #include "Commands/commandQUIT.hpp"
 #include <sstream>
 #include "Client.hpp"
+#include "Commands/commandEPSV.hpp"
 #include "Commands/commandPASS.hpp"
 #include "Commands/commandSYST.hpp"
 #include "Commands/commandUSER.hpp"
@@ -26,6 +27,7 @@ commandManager::commandManager()
     _commands["TYPE"] = std::make_unique<commandTYPE>();
     _commands["MODE"] = std::make_unique<commandMODE>();
     _commands["STRU"] = std::make_unique<commandSTRU>();
+    _commands["EPSV"] = std::make_unique<commandEPSV>();
 }
 
 void commandManager::execute(Client &client, const std::string &command)

@@ -38,26 +38,7 @@ void commandPORT::execute(Client &client, std::string &command)
     + std::to_string(info[2]) + '.' + std::to_string(info[3]);
 
     int port = (info[4] * 256) + info[5];
-    client.closeDataFd();
-    int dataFd = socket(AF_INET, SOCK_STREAM, 0);
-    if (dataFd < 0) {
-        client.sendData("425 error creating the socket\r\n");
-        return;
-    }
-    struct sockaddr_in addr{};
-    addr.sin_addr.s_addr = INADDR_ANY;
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port);
-    if (inet_pton(AF_INET, ip.c_str(), &addr.sin_addr) < 0) {
-        close(dataFd);
-        client.sendData("502 can't convert to ip network\r\n");
-        return;
-    }
-    if (connect(dataFd, reinterpret_cast<struct sockaddr *>(&addr), sizeof(addr)) < 0) {
-        client.sendData("425 can't open connection\r\n");
-        close(dataFd);
-        return;
-    }
-    client.setDataFd(dataFd);
+    client.setActivePort(port);
+    client.setActiveIp(ip);
     client.sendData("200 port correctly assigned\r\n");
 }

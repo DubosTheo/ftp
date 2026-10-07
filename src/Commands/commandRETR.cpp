@@ -16,16 +16,16 @@ void commandRETR::execute(Client &client, std::string &command)
         client.sendData(err);
         return;
     }
-    int dataFd = client.getDataFd();
+    int dataFd = client.handleDataFd();
+
     if (dataFd < 0) {
         client.sendData("425 Use PORT or PASV first.\r\n");
         return;
     }
-
     std::ifstream file(command, std::ios::binary);
     if (!file.is_open()) {
         client.sendData("550 Failed to open file.\r\n");
-        client.closeDataFd();
+        close(dataFd);
         return;
     }
     client.sendData("150 Opening BINARY mode data connection.\r\n");
@@ -34,7 +34,7 @@ void commandRETR::execute(Client &client, std::string &command)
     if (pid < 0) {
         client.sendData("451 Local error in processing.\r\n");
         file.close();
-        client.closeDataFd();
+        close(dataFd);
         return;
     }
     if (pid == 0) {
@@ -67,5 +67,5 @@ void commandRETR::execute(Client &client, std::string &command)
         exit(0);
     }
     file.close();
-    client.closeDataFd();
+    close(dataFd);
 }
