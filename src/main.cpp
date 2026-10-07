@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <csignal>
 #include "Server.hpp"
 
 int main(int argc, char **argv)
@@ -9,6 +10,8 @@ int main(int argc, char **argv)
     try {
         if (chdir(argv[2]) < 0)
             throw std::runtime_error("No directory found\n");
+        std::signal(SIGCHLD, SIG_IGN);
+        std::signal(SIGPIPE, SIG_IGN);
         ftpServer server(argv[1]);
         server.run();
     } catch (std::out_of_range &out) {
