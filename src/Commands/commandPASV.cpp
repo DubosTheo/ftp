@@ -25,7 +25,11 @@ void commandPASV::execute(Client &client, [[maybe_unused]]std::string &command)
         close(tmpFd);
         return client.sendData("502 Can't bind fd\r\n");
     }
-    listen(tmpFd, 1);
+    if (listen(tmpFd, 1) < 0) {
+        close(tmpFd);
+        client.sendData("425 Can't listen on socket.\r\n");
+        return;
+    }
     socklen_t len = sizeof(addr);
     if (getsockname(tmpFd, reinterpret_cast<struct sockaddr *>(&addr), &len) < 0) {
         close(tmpFd);
