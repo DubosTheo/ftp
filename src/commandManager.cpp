@@ -11,6 +11,7 @@
 #include "Commands/commandPORT.hpp"
 #include "Commands/commandTYPE.hpp"
 #include "Commands/commandMODE.hpp"
+#include "Commands/commandSTRU.hpp"
 
 commandManager::commandManager()
 {
@@ -24,6 +25,7 @@ commandManager::commandManager()
     _commands["PORT"] = std::make_unique<commandPORT>();
     _commands["TYPE"] = std::make_unique<commandTYPE>();
     _commands["MODE"] = std::make_unique<commandMODE>();
+    _commands["STRU"] = std::make_unique<commandSTRU>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)

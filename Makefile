@@ -20,6 +20,7 @@ SRC += src/Commands/commandPASV.cpp
 SRC += src/Commands/commandPORT.cpp
 SRC += src/Commands/commandTYPE.cpp
 SRC += src/Commands/commandMODE.cpp
+SRD += src/Commands/commandSTRU.cpp
 
 SRC_MAIN = src/main.cpp
 
