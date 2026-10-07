@@ -18,6 +18,7 @@ SRC += src/Commands/commandFEAT.cpp
 SRC +=  src/Commands/commandRETR.cpp
 SRC += src/Commands/commandPASV.cpp
 SRC += src/Commands/commandPORT.cpp
+SRC += src/Commands/commandTYPE.cpp
 
 SRC_MAIN = src/main.cpp
 

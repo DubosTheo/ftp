@@ -8,6 +8,8 @@
 #include "Commands/commandFEAT.hpp"
 #include "Commands/commandPASV.hpp"
 #include "Commands/commandRETR.hpp"
+#include "Commands/commandPORT.hpp"
+#include "Commands/commandTYPE.hpp"
 
 commandManager::commandManager()
 {
@@ -18,6 +20,8 @@ commandManager::commandManager()
     _commands["FEAT"] = std::make_unique<commandFEAT>();
     _commands["RETR"] = std::make_unique<commandRETR>();
     _commands["PASV"] = std::make_unique<commandPASV>();
+    _commands["PORT"] = std::make_unique<commandPORT>();
+    _commands["TYPE"] = std::make_unique<commandTYPE>();
 }
 
 void commandManager::execute(Client &client, const std::string &command, ftpServer &server)
