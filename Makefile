@@ -22,6 +22,7 @@ SRC += src/Commands/commandTYPE.cpp
 SRC += src/Commands/commandMODE.cpp
 SRC += src/Commands/commandSTRU.cpp
 SRC += src/Commands/commandEPSV.cpp
+SRC += src/Commands/commandPWD.cpp
 
 SRC_MAIN = src/main.cpp
 
