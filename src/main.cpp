@@ -12,7 +12,7 @@ int main(int argc, char **argv)
             throw std::runtime_error("No directory found\n");
         std::signal(SIGCHLD, SIG_IGN);
         std::signal(SIGPIPE, SIG_IGN);
-        ftpServer server(argv[1]);
+        ftpServer server(argv[1], argv[2]);
         server.run();
     } catch (std::out_of_range &out) {
         std::cerr << out.what();

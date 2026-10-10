@@ -8,8 +8,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <filesystem>
 
-Client::Client(int fd) : _fd(fd), _pasvFd(-1), _activePort(0)
+Client::Client(int fd, std::string path) : _fd(fd), _pasvFd(-1), _activePort(0), _rootPath(std::filesystem::absolute(path)), _currentPath(path)
 {
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <filesystem>
 #include <string>
 
 class ftpServer;
@@ -11,11 +12,13 @@ class Client {
     std::string _username;
     std::string _buffer;
     std::string _activeIp;
+    std::filesystem::path _rootPath;
+    std::filesystem::path _currentPath;
     bool _isAuth = false;
     bool _needToDisconnect = false;
     bool _isLoggedIn = false;
 public:
-    explicit Client(int fd);
+    explicit Client(int fd, std::string path);
     void appendBuffer(std::string buffer);
     size_t readData();
     int handleDataFd();
@@ -30,9 +33,12 @@ public:
     [[nodiscard]] bool getLoggedIn() const {return _isLoggedIn;}
     std::string getUsername() {return _username;}
     [[nodiscard]] int getPasv() const {return _pasvFd;}
-    void setPasv(const int pasv) {_pasvFd = pasv;};
+    void setPasv(const int pasv) {_pasvFd = pasv;}
     void setActivePort(int activePort) {_activePort = activePort;}
     [[nodiscard]] int getActivePort() const {return _activePort;}
     void setActiveIp(const std::string &activeIp) {_activeIp = activeIp;}
     std::string getActiveIp() {return _activeIp;}
+    std::filesystem::path getRootPath() {return _rootPath;}
+    std::filesystem::path getCurrentPath() {return _currentPath;}
+    void setCurrentPath(const std::filesystem::path &currentPath) {_currentPath = currentPath;}
 };

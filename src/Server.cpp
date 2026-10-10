@@ -4,7 +4,7 @@
 #include <netinet/in.h>
 #include <sstream>
 
-ftpServer::ftpServer(const std::string strPort)
+ftpServer::ftpServer(const std::string& strPort, const std::string& path)
 {
     try {
         _port = std::stoi(strPort);
@@ -26,6 +26,7 @@ ftpServer::ftpServer(const std::string strPort)
         close(serverFd.fd);
         throw std::runtime_error("Error binding serverFd\n");
     }
+    _path = path;
     _fds.push_back(serverFd);
 }
 
@@ -38,7 +39,7 @@ void ftpServer::addClient(int fd)
     _fds.push_back(clientFd);
     std::cout << "[+] - New client connected\n";
     std::string str = "220 Hello client!\r\n";
-    _clients.insert({fd, Client(fd)});
+    _clients.insert({fd, Client(fd, _path)});
     write(fd, str.c_str(), str.size());
 }
 

@@ -13,8 +13,9 @@ private:
     std::map<int, Client> _clients;
     size_t _serverId = 0;
     int _port;
+    std::string _path;
 public:
-    explicit ftpServer(std::string strPort);
+    explicit ftpServer(const std::string& strPort, const std::string& path);
     void run();
     void addClient(int fd);
     void deleteClient(int i, int fd);
